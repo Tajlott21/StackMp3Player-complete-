@@ -1,3 +1,5 @@
+package MP3Project;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.Stack;
 
@@ -9,11 +11,21 @@ public class Stackmp3Player {
 			"Fig Leaf Bi-Carbonate", "Kon Karne", 	"Guinnesses", "Kon Queso", 
 			"Rapp Snitch Knishes", "VomitSpit", "Kookies"};
 	
+	static Stack<String> Mp3Player = new Stack<String>();
+	
+	static int Tracknum;
 	
 	
-	private static void Mp3Player() {
+	
+	protected static void Mp3Player() {
 		
-		Stack<String> Mp3Player = new Stack<String>();
+		System.out.println("Welcome to the Stack Mp3Player!");
+		System.out.println();
+		System.out.println("Your current album: " + "Mm..Food by MFDoom");
+		System.out.println();
+		System.out.println("Songlist: " + Arrays.toString(MFDoom));
+		System.out.println();
+		
 		
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter the Track number you would like to listen to: ");
@@ -28,21 +40,16 @@ public class Stackmp3Player {
 			
 		}
 		
-		
-		System.out.println();
-		System.out.println("Current song: ");
-		System.out.println(MFDoom[Tracknum-1] + " by MF Doom");
-		System.out.println();
-		System.out.println("Previous song: ");
-		System.out.println(MFDoom[Tracknum-2] + " by MF Doom");
-		System.out.println();
-		System.out.println("Up Next: ");
-		System.out.println(Mp3Player); //Will print all songs after the chosen one in the stack
+		displaySong(Tracknum);
 		
 		
 		}catch (Exception e) {
 			
-			System.out.println("Not a valid song");
+			System.out.println("Not a valid song. Please Try Again");
+			System.out.println();
+			System.out.println();
+			System.out.println();
+			Mp3Player();
 		}
 		
 		
@@ -51,16 +58,85 @@ public class Stackmp3Player {
 		
 	}
 	
-	private static void nextSong() {
+	
+	protected static void displaySong(int Tracknum) {
+		
+		System.out.println();
+		System.out.println("Current song: " + MFDoom[Tracknum-1] + " by MF Doom");  //Minus one because array naturally starts at 0. Obviously, this is not conducive to music so I made it so that their chosen Track is equal to the proper index on the array, so that Track 1 is actually Track 0 and so on.
+		System.out.println();
+		System.out.println("Previous song: " + MFDoom[Tracknum-2] + " by MF Doom");
+		System.out.println();
+		System.out.println("Up Next: ");
+		System.out.println(Mp3Player); //Will print all songs after the chosen one in the stack
+		System.out.println();
+		userChoice(Tracknum);
+		
+		
+	}
+	
+	protected static void userChoice(int Tracknum) {
+		
+		Scanner s = new Scanner(System.in);
+		System.out.println("Press 1 to play previous song  " + "Press 2 to play next song");
+		System.out.println("Press 3 to play repeat song  " + "Press 4 to exit program");
+	
+		
+		try {
+			
+			int userSelection = s.nextInt();
+			
+			if (userSelection == 1) {
+				
+				System.out.println(Tracknum);
+				previousSong(Tracknum);
+			}
+			
+			else if (userSelection == 2) {
+				
+				nextSong(Tracknum);
+			}
+			
+			else if (userSelection == 3) {
+				
+				displaySong(Tracknum);
+			}
+			
+			else if (userSelection == 4) {
+				
+				
+				System.out.println("Thank you for using the StackMp3Player!");
+				System.exit(0);
+			}
+			
+		}catch (Exception e) {
+			
+			System.out.println("Not a valid selection. Please Try Again");
+		}
+		
+		s.close();
+	}
+	
+	protected static void nextSong(int Tracknum) {
+		
+		Tracknum++;
+		displaySong(Tracknum);
 		
 		
 		
 	}
 	
 	
-	private static void previousSong() {
+	protected static void previousSong(int Tracknum) {
 		
+		Tracknum--;
 		
+		for ( int i = Tracknum; i < MFDoom.length; i++) {
+			
+			Mp3Player.push(MFDoom[i]); //Doing this through Stack and not the array makes the time complexity much smoother since it only processes one iteration at a time
+		
+			
+		}
+		displaySong(Tracknum);
 	}
 
 	public static void main(String[] args) {
