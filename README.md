@@ -3,4 +3,4 @@ A simple mock Mp3Player featuring the MF Doom album "Mm..Food". It allows the us
 
 This is a knowledge experiment to test my newly gained knowledge of how the stack data structure works.
 
-The current issue i am experiencing is that when the usr wants to play he next/previous song, the stack variable will not update.
+The current issue i am experiencing is that when the user wants to play he next/previous song, the stack variable will not update. In other words, I would like to restack the stack.
