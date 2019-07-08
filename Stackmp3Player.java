@@ -69,6 +69,10 @@ public class Stackmp3Player {
 		 * as opposed to getting an ArrayOutOfBounds Error
 		
 		*/
+		
+
+		
+		
 		if (Tracknum == 1) {
 			
 			System.out.println();
@@ -81,7 +85,24 @@ public class Stackmp3Player {
 			System.out.println();
 			userChoice(Tracknum);
 			
-		}else {
+		}else if (Tracknum == 15) {
+			
+
+			System.out.println();
+			System.out.println("Current song: " + MFDoom[Tracknum-1] + " by MF Doom");  //Minus one because array naturally starts at 0. Obviously, this is not conducive to music so I made it so that their chosen Track is equal to the proper index on the array, so that Track 1 is actually Track 0 and so on.
+			System.out.println();
+			System.out.println("Previous song: " + MFDoom[Tracknum-2] + " by MF Doom");
+			System.out.println();
+			System.out.println("Up Next: ");
+			System.out.println("This is the last song within this album"); //Will print all songs after the chosen one in the stack
+			System.out.println();
+			userChoice(Tracknum);
+		}
+				
+				
+			
+			
+		else {
 		
 		System.out.println();
 		System.out.println("Current song: " + MFDoom[Tracknum-1] + " by MF Doom");  //Minus one because array naturally starts at 0. Obviously, this is not conducive to music so I made it so that their chosen Track is equal to the proper index on the array, so that Track 1 is actually Track 0 and so on.
@@ -93,10 +114,14 @@ public class Stackmp3Player {
 		System.out.println();
 		userChoice(Tracknum);
 		
+		
 		}
+		
+		
 	}
 	
 	protected static void userChoice(int Tracknum) {
+		
 		
 		Scanner s = new Scanner(System.in);
 		System.out.println("Press 1 to play previous song  " + "Press 2 to play next song");
@@ -109,7 +134,8 @@ public class Stackmp3Player {
 			
 			if (userSelection == 1) {
 				
-				//System.out.println(Tracknum);
+				System.out.println(Tracknum);
+				
 				previousSong(Tracknum);
 			}
 			
@@ -143,7 +169,26 @@ public class Stackmp3Player {
 	
 	protected static void nextSong(int Tracknum) {
 		
+
+		//This will erase the stack, and the next loop will replace the stack
+
+		for ( int i = Tracknum; i< MFDoom.length; i++) {
+			
+			Mp3Player.pop();
+			
+		}
+		
 		Tracknum++;
+		
+
+		
+		for ( int i = Tracknum; i< MFDoom.length; i++) {
+			
+			Mp3Player.push(MFDoom[i]); //Doing this through Stack and not the array makes the time complexity much smoother since it only processes one iteration at a time
+			
+		}
+		
+		
 		displaySong(Tracknum);
 		
 		
@@ -153,9 +198,18 @@ public class Stackmp3Player {
 	
 	protected static void previousSong(int Tracknum) {
 		
+		//This will erase the stack, and the next loop will replace the stack
+
+		for ( int i = Tracknum; i< MFDoom.length; i++) {
+			
+			Mp3Player.pop();
+			
+		}
+		
 		Tracknum--;
 		
-		for ( int i = Tracknum; i < MFDoom.length; i++) {
+		
+		for ( int i = Tracknum; i< MFDoom.length; i++) {
 			
 			Mp3Player.push(MFDoom[i]); //Doing this through Stack and not the array makes the time complexity much smoother since it only processes one iteration at a time
 			
