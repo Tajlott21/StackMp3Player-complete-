@@ -28,7 +28,7 @@ public class Stackmp3Player {
 		
 		
 		Scanner sc = new Scanner(System.in);
-		System.out.println("Enter the Track number you would like to listen to: ");
+		System.out.print("Enter the Track number you would like to listen to: ");
 		
 		try {
 		int Tracknum = sc.nextInt();
@@ -126,6 +126,7 @@ public class Stackmp3Player {
 		Scanner s = new Scanner(System.in);
 		System.out.println("Press 1 to play previous song  " + "Press 2 to play next song");
 		System.out.println("Press 3 to play repeat song  " + "Press 4 to exit program");
+		System.out.print("Your Choice: ");
 	
 		
 		try {
